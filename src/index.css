@@ -47,7 +47,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
+  max-width: 405px;
   height: 100%;
+  margin-left: 36px;
+  margin-right: 36px;
 }
 
 form {
@@ -93,8 +97,15 @@ form {
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease-in-out;
+  margin-bottom: 36px;
 }
 
 .meme-button:hover {
   background-color: #711F8D;
+}
+
+.meme--image{
+  max-width: 100%;
+  height: auto;
+  border-radius: 2px;
 }
