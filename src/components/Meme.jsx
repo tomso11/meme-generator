@@ -1,5 +1,5 @@
 import memesData from "../memesData";
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 export const Meme = () => {
     const [meme, setMeme] = useState({
@@ -13,7 +13,16 @@ export const Meme = () => {
         bottomFormText: "",
     });
 
-    const [allMemeImgs, setAllMemeImgs] = useState(memesData.data.memes);
+    const [allMemes, setAllMemes] = useState(memesData)
+
+    useEffect(() => {
+        async function getMemes() {
+            const res = await fetch("https://api.imgflip.com/get_memes")
+            const data = await res.json()
+            setAllMemes(data.data.memes)
+        }
+        getMemes()
+    }, []);
 
     function handleChange(event) {
         const {name, value, type, checked} = event.target
@@ -41,10 +50,10 @@ export const Meme = () => {
 
     const getMemeImage = () => {
         // Generate a random index between 0 and the length of the memeData array
-        const randomIndex = Math.floor(Math.random() * allMemeImgs.length);
+        const randomIndex = Math.floor(Math.random() * allMemes.length);
 
         // Get the meme object from the memeData array using the random index
-        const randomMeme = allMemeImgs[randomIndex];
+        const randomMeme = allMemes[randomIndex];
 
         // Return the URL property from the meme object
         console.log(randomMeme);
